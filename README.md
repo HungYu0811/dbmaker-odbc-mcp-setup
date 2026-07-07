@@ -38,8 +38,8 @@ UsageCount = 1
 [MYDB]
 Description = DBMaker MYDB
 Driver = DBMaker
-Server = 127.0.0.1
-Port = 2495
+Server = <YOUR DBMAKER SERVER IP>
+Port = <YOUR DBMAKER PORT NUMBER>
 Database = MYDB
 User = SYSADM
 Password =
@@ -200,7 +200,7 @@ This example generates `id_ed25519` and `id_ed25519.pub`.
 ### 2. Copy the public key to Linux
 
 ```powershell
-type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh -p <YOUR PORT NUMBER> mcpdev@127.0.0.1 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh -p <YOUR PORT NUMBER> mcpdev@<YOUR LINUX IP> "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 ```
 
 You'll be prompted for the password once during this step.
@@ -208,13 +208,13 @@ You'll be prompted for the password once during this step.
 ### 3. Test passwordless SSH from Windows to Linux
 
 ```powershell
-ssh -p <YOUR PORT NUMBER> mcpdev@127.0.0.1
+ssh -p <YOUR PORT NUMBER> mcpdev@<YOUR LINUX IP>
 ```
 
 ### 4. Test whether the MCP Server can be started from Windows
 
 ```powershell
-ssh -p <YOUR PORT NUMBER> mcpdev@127.0.0.1 "/home/mcpdev/mcp-odbc/.venv312/bin/odbc-mcp-server --config /home/mcpdev/mcp-odbc/config.ini"
+ssh -p <YOUR PORT NUMBER> mcpdev@<YOUR LINUX IP> "/home/mcpdev/mcp-odbc/.venv312/bin/odbc-mcp-server --config /home/mcpdev/mcp-odbc/config.ini"
 ```
 
 A successful connection shows:
@@ -239,7 +239,7 @@ Add the following (**paths must be adjusted per device, and must be absolute pat
       "command": "C:\\Users\\<username>\\AppData\\Local\\GitHubDesktop\\app-<version>\\resources\\app\\git\\usr\\bin\\ssh.exe",
       "args": [
         "-p", "<YOUR PORT NUMBER>",
-        "mcpdev@127.0.0.1",
+        "mcpdev@<YOUR LINUX IP>",
         "/home/mcpdev/mcp-odbc/.venv312/bin/odbc-mcp-server",
         "--config", "/home/mcpdev/mcp-odbc/config.ini"
       ]
@@ -290,7 +290,7 @@ Click **New MCP Server** to open `mcp.json`, and edit it according to your devic
       "command": "ssh",
       "args": [
         "-p", "<YOUR PORT NUMBER>",
-        "mcpdev@127.0.0.1",
+        "mcpdev@<YOUR LINUX IP>",
         "/home/mcpdev/mcp-odbc/.venv312/bin/odbc-mcp-server",
         "--config", "/home/mcpdev/mcp-odbc/config.ini"
       ]
