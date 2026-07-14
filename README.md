@@ -1,6 +1,6 @@
 # Connecting an LLM to a DBMaker Database via ODBC MCP SERVER
 
-This guide is based on the original `mcp-odbc` project, with additional DBMaker-specific extensions including health monitoring, active session inspection, lock analysis, wait analysis, stored procedure inspection, trigger inspection, and foreign key exploration.
+This guide is based on the original `tylerstoltz/mcp-odbc` project, with additional DBMaker-specific monitoring and administration tools.
 
 > This document records the setup and debugging process for connecting a DBMaker database using [tylerstoltz/mcp-odbc](https://github.com/tylerstoltz/mcp-odbc) (MIT License). Copyright of the original code belongs to the original author; this document only shares environment setup and troubleshooting notes, and does not include the original project's source code.
 
