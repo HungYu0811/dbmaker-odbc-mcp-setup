@@ -168,6 +168,10 @@ dsn = MYDB
 username = SYSADM
 password =
 readonly = true
+
+[DBMAKER_CLI]
+dmsqlc_path=/path/to/dbmaker/bundle/dmsqlc
+database=MYDB
 ```
 
 > `readonly = true`: Only SELECT queries are allowed — any INSERT / UPDATE / DELETE will be blocked by the MCP server. To allow write access, change this to `false`, but carefully weigh the risk (the AI could accidentally delete or modify data).
