@@ -1,13 +1,14 @@
-# Connecting an LLM to a DBMaker Database via ODBC MCP SERVER
+# Connecting an LLM to a DBMaker Database via ODBC MCP Server
 
-This guide is based on the original `tylerstoltz/mcp-odbc` project, with additional DBMaker-specific monitoring and administration tools.
+This project is based on the original [`tylerstoltz/mcp-odbc`](https://github.com/tylerstoltz/mcp-odbc) project, with modifications and additional DBMaker-specific MCP tools for database monitoring, administration, and ODBC integration.
 
-> This document records the setup and debugging process for connecting a DBMaker database using [tylerstoltz/mcp-odbc](https://github.com/tylerstoltz/mcp-odbc) (MIT License). Copyright of the original code belongs to the original author; this document only shares environment setup and troubleshooting notes, and does not include the original project's source code.
+> The original MCP server code is licensed under the MIT License and belongs to the original author. This repository contains modifications and extensions based on the original project, including DBMaker-specific MCP tools and integration examples.
 
-**OS:** AlmaLinux 8.9 (Midnight Oncilla)
-**DBMaker:** 5.4.8 bundle (#32453, 20260701)
-**AI Client:** Claude Desktop, Cursor Desktop
-**MCP Server:** [tylerstoltz/mcp-odbc](https://github.com/tylerstoltz/mcp-odbc)
+**OS:** AlmaLinux 8.9 (Midnight Oncilla)  
+**DBMaker:** 5.4.8 bundle (#32453, 20260701)  
+**AI Client:** Claude Desktop, Cursor Desktop  
+**Base MCP Server:** [`tylerstoltz/mcp-odbc`](https://github.com/tylerstoltz/mcp-odbc)  
+**Database Integration:** DBMaker via ODBC
 
 ⚠️ **Security note**: In the examples below, the database password field is left blank, which is only suitable for internal testing environments. For production environments, always set a password and consider restricting the database to local-only connections.
 
@@ -321,7 +322,16 @@ The following DBMaker-specific tools have been added on top of the original `mcp
 | `list-triggers` | List all triggers, including their associated tables and trigger events. |
 | `list-foreign-keys` | Display foreign key relationships between tables. |
 
+---
+
+### Implementation Notes
+`get-stored-procedure-definition` retrieves stored procedure definitions through the DBMaker CLI instead of ODBC.
+
+This approach is used because DBMaker's ODBC interface does not provide a direct method for retrieving stored procedure source definitions. The tool invokes DBMaker CLI commands to obtain the procedure definition and returns the result through MCP.
+
 These extensions are implemented specifically for DBMaker and are not part of the original `mcp-odbc` project.
+
+Supported DBMaker system tables/views include:
 
 - `SYSINFO`
 - `SYSUSER`
