@@ -1,5 +1,7 @@
 # Connecting an LLM to a DBMaker Database via ODBC MCP SERVER
 
+This guide is based on the original `mcp-odbc` project, with additional DBMaker-specific extensions including health monitoring, active session inspection, lock analysis, wait analysis, stored procedure inspection, trigger inspection, and foreign key exploration.
+
 > This document records the setup and debugging process for connecting a DBMaker database using [tylerstoltz/mcp-odbc](https://github.com/tylerstoltz/mcp-odbc) (MIT License). Copyright of the original code belongs to the original author; this document only shares environment setup and troubleshooting notes, and does not include the original project's source code.
 
 **OS:** AlmaLinux 8.9 (Midnight Oncilla)
@@ -299,4 +301,34 @@ Click **New MCP Server** to open `mcp.json`, and edit it according to your devic
 }
 ```
 
-A successful connection will show `6 tools enabled`.
+A successful connection will show the DBMaker MCP tools enabled. The exact number of available tools depends on your customized MCP server implementation.
+
+---
+
+## 10. DBMaker Extensions
+
+The following DBMaker-specific tools have been added on top of the original `mcp-odbc` project:
+
+| Tool | Description |
+|------|-------------|
+| `health-check` | Display DBMaker health information, including CPU usage, memory usage, active connections, and peak connections. |
+| `list-active-users` | List current database sessions, including login time, client host, current SQL statement, and transaction count. |
+| `list-locks` | Display the current database locks from `SYSLOCK`, including lock granularity, status, and lock modes. |
+| `list-waits` | Display waiting lock relationships from `SYSWAIT` to help diagnose blocking sessions. |
+| `list-user-stored-procedures` | List all user-defined stored procedures. |
+| `list-system-stored-procedures` | List all built-in DBMaker stored procedures. |
+| `get-stored-procedure-definition` | Retrieve the complete definition of a specified stored procedure. |
+| `list-triggers` | List all triggers, including their associated tables and trigger events. |
+| `list-foreign-keys` | Display foreign key relationships between tables. |
+
+These extensions are implemented specifically for DBMaker and are not part of the original `mcp-odbc` project.
+
+- `SYSINFO`
+- `SYSUSER`
+- `SYSLOCK`
+- `SYSWAIT`
+- `SYSPROCINFO`
+- `SYSTRIGGER`
+- `SYSFOREIGNKEY`
+
+These extensions provide AI assistants with richer database administration, monitoring, troubleshooting, and schema exploration capabilities.
